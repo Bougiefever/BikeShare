@@ -1,0 +1,7 @@
+address: 23.96.255.109
+baseDockerImage: microsoft/mmlspark:plus-0.7.91
+nativeSharedDirectory: ~/.azureml/share/
+password: AzureMlSecret=mydevvm#chokara#99e6f575ca554d868a12d5101362b17c
+sharedVolumes: true
+type: remotedocker
+username: chokara

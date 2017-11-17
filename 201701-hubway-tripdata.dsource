@@ -1,0 +1,173 @@
+{
+  "schemaVersion": 39,
+  "id": "5576efaf-89f4-4259-8d50-48e25e8a3523",
+  "activities": [
+    {
+      "id": "0babcdec-7826-4e20-bbe8-45880345d95b",
+      "name": "201701-hubway-tripdata",
+      "blocks": [
+        {
+          "id": "047a6d08-a859-406d-bef5-af9e6466fc35",
+          "type": "Microsoft.DPrep.DataSourceBlock",
+          "arguments": {
+            "path": {
+              "target": 1,
+              "resourceDetails": [
+                {
+                  "path": "https://bikesharestorage.blob.core.windows.net/bikeshareml-def/bikeshare/tripdata/201701-hubway-tripdata.csv",
+                  "sas": {
+                    "id": "https://bikesharestorage.blob.core.windows.net/bikeshareml-def/bikeshare/tripdata/201701-hubway-tripdata.csv",
+                    "secretType": "AzureMLSecret"
+                  },
+                  "storageAccountName": "bikesharestorage",
+                  "storageAccountKey": {
+                    "id": "bikesharestorage",
+                    "secretType": "AzureMLSecret"
+                  }
+                }
+              ]
+            }
+          }
+        },
+        {
+          "id": "790d17e9-5537-4802-894c-c3c5250be1a9",
+          "type": "Microsoft.DPrep.ParseDelimitedBlock",
+          "arguments": {
+            "preview": false,
+            "columnHeadersMode": 1,
+            "separator": ",",
+            "fileEncoding": 0,
+            "skipRowsMode": 0,
+            "handleQuotedLineBreaks": false
+          }
+        },
+        {
+          "id": "8d8cd319-b9b2-475f-98bf-c57fcd7cae8d",
+          "type": "Microsoft.DPrep.SetColumnTypesBlock",
+          "arguments": {
+            "columnConversion": [
+              {
+                "columnId": "starttime",
+                "typeProperty": 4,
+                "typeArguments": {
+                  "dateTimeFormat": "%Y-%m-%d %H:%M:%S"
+                }
+              },
+              {
+                "columnId": "stoptime",
+                "typeProperty": 4,
+                "typeArguments": {
+                  "dateTimeFormat": "%Y-%m-%d %H:%M:%S"
+                }
+              },
+              {
+                "columnId": "start station longitude",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "end station longitude",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "tripduration",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "start station id",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "start station latitude",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "end station id",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "end station latitude",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "bikeid",
+                "typeProperty": 3,
+                "typeArguments": {}
+              },
+              {
+                "columnId": "gender",
+                "typeProperty": 3,
+                "typeArguments": {}
+              }
+            ]
+          }
+        },
+        {
+          "id": "705b94d5-85cf-4cd3-a4de-fa7a6f76d4e1",
+          "type": "Microsoft.DPrep.SampleBlock",
+          "arguments": {
+            "samples": [
+              {
+                "sampleId": "5c63999e-cb15-4b61-81ff-eef17ff73eb0",
+                "sampleRevision": "ecfcc6f6-b2de-421d-beba-5f3f7720375f",
+                "sampleName": "Full File",
+                "sampleRunner": {
+                  "id": null,
+                  "type": 0
+                },
+                "remoteGeneratorProperties": {},
+                "sampleStrategy": 3,
+                "topArguments": {
+                  "sampleCount": 10000
+                },
+                "randomNArguments": {
+                  "sampleCount": 10000
+                },
+                "randomPercentArguments": {
+                  "probability": 0.1
+                },
+                "allowAutoGen": true,
+                "isDisabled": false
+              }
+            ],
+            "activeSample": "5c63999e-cb15-4b61-81ff-eef17ff73eb0"
+          }
+        },
+        {
+          "id": "f4e3e7c6-7bba-40af-874a-d5529af01a24",
+          "type": "Microsoft.DPrep.HandlePathColumnBlock",
+          "arguments": {
+            "pathColumnOperation": 0
+          }
+        }
+      ],
+      "inspectors": [
+        {
+          "id": "fdbf6115-64aa-49dc-906d-d62c3fa53857",
+          "type": "Microsoft.DPrep.DataQualityInspector",
+          "arguments": {},
+          "reference": {
+            "referenceType": 0,
+            "referenceContainerPath": null,
+            "referencedActivityId": "0babcdec-7826-4e20-bbe8-45880345d95b",
+            "referencedBranchId": null,
+            "referencedStep": {
+              "stepReferenceType": 1,
+              "referencedStepId": null,
+              "fallback": 1
+            },
+            "anonymousSteps": null
+          },
+          "isBackground": false
+        }
+      ]
+    }
+  ],
+  "runConfigurations": []
+}
